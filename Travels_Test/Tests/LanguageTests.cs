@@ -12,37 +12,43 @@ namespace Travels_Test.Tests
         public void LanguageArabic()
         {
             var Language = new Language(Driver);
-            Language.ChangeLanguage("ARABIC");
+            Language.ChangeLanguage("Arabic");
+            Assert.AreEqual("ARABIC", Language.LanduageDropdown.Text, "Currency wasn't change to preffered on (Arabic)");
         }
         [TestMethod] //CHANGE LANGUAGE TO TURKISH
         public void LanguageTurkish()
         {
             var Language = new Language(Driver);
-            Language.ChangeLanguage("TURKISH");
+            Language.ChangeLanguage("Turkish");
+            Assert.AreEqual("TURKISH", Language.LanduageDropdown.Text, "Currency wasn't change to preffered on (Turkish)");
         }
         [TestMethod] //CHANGE LANGUAGE TO FRENCH
         public void LanguageFrench()
         {
             var Language = new Language(Driver);
-            Language.ChangeLanguage("FRENCH");
+            Language.ChangeLanguage("French");
+            Assert.AreEqual("FRENCH", Language.LanduageDropdown.Text, "Currency wasn't change to preffered on (French)");
         }
         [TestMethod] //CHANGE LANGUAGE TO SPANISH
         public void LanguageSpanish()
         {
             var Language = new Language(Driver);
-            Language.ChangeLanguage("SPANISH");
+            Language.ChangeLanguage("Spanish");
+            Assert.AreEqual("SPANISH", Language.LanduageDropdown.Text, "Currency wasn't change to preffered on (Spanish)");
         }
         [TestMethod] //CHANGE LANGUAGE TO RUSSIAN
         public void LanguageRussian()
         {
             var Language = new Language(Driver);
-            Language.ChangeLanguage("RUSSIAN");
+            Language.ChangeLanguage("Russian");
+            Assert.AreEqual("RUSSIAN", Language.LanduageDropdown.Text, "Currency wasn't change to preffered on (Russian)");
         }
         [TestMethod] //CHANGE LANGUAGE TO ENGLISH
         public void LanguageEnglish()
         {
             var Language = new Language(Driver);
-            Language.ChangeLanguage("ENGLISH");
+            Language.ChangeLanguage("English");
+            Assert.AreEqual("ENGLISH", Language.LanduageDropdown.Text, "Currency wasn't change to preffered on (English)");
         }
     }
 }

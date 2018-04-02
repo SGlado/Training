@@ -57,16 +57,15 @@ namespace Travels_Test.PageObjects
         {
             Driver = driver;
         }
-        public IWebElement LanduageDropdown => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//li[@id='li_myaccount']/following-sibling::li"));
+        public IWebElement LanduageDropdown => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//li[@id='li_myaccount']/following-sibling::ul"));
         internal Language ChangeLanguage(string newLanguage)
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
             wait.Until(p => LanduageDropdown.Displayed == true);
             LanduageDropdown.Click();
 
-            Driver.FindElement(By.XPath(String.Format("//div[@class='tbar-top hidden-sm hidden-xs']//a[@onclick='change_language(this)' and contains(text(), '{0}') ]", newLanguage))).Click();
+            Driver.FindElement(By.XPath(String.Format("//div[@class='tbar-top hidden-sm hidden-xs']//a[@class='go-text-right changelang' and contains(text(), '{0}') ]", newLanguage))).Click();
             return new Language(Driver);
-            
         }
     }
 }

@@ -64,6 +64,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Framework\BaseTest.cs" />
+    <Compile Include="Framework\Waiting.cs" />
     <Compile Include="PageObjects\Toolbar.cs" />
     <Compile Include="Tests\TravelTests.cs" />
     <Compile Include="PageObjects\LoginPage.cs" />
