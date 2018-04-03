@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Threading;
+using Travels_Test.Framework;
 
 namespace Travels_Test.PageObjects
 {
@@ -13,23 +14,9 @@ namespace Travels_Test.PageObjects
             Driver = driver;
         }
 
-        public IWebElement AccountDropdown => Driver.FindElement(By.XPath("/ html / body / div[4] / div / div / div[2] / ul / li[1] / a"));
+        public IWebElement AccountDropdown => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//*[class='dropdown-menu']"));
         public IWebElement LogoutButton => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//*[text()='  Logout']"));
-
-
-        internal AccountPage Logout()
-        {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-            wait.Until(p => AccountDropdown.Displayed == true);
-            Thread.Sleep(3000);
-
-            AccountDropdown.Click();
-
-            wait.Until(p => LogoutButton.Displayed == true);
-            LogoutButton.Click();
-            Driver.Navigate().GoToUrl("https://www.phptravels.net/");
-            return new AccountPage(Driver);
-        }
+        
 
     }
     class Currency
@@ -39,12 +26,14 @@ namespace Travels_Test.PageObjects
         {
             Driver = driver;
         }
-        public IWebElement CurrencyDropdown => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//li[@id='li_myaccount']/following-sibling::li"));
+        public IWebElement CurrencyDropdown => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//li[@id='li_myaccount']/following-sibling::li[@class='dropdown']"));
         internal Currency ChangeCurrency(string newCurrency)
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
             wait.Until(p => CurrencyDropdown.Displayed == true);
             CurrencyDropdown.Click();
+
+            wait.Until(p => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//ul[@class='dropdown-menu wow fadeIn animated']")).Displayed == true); 
 
             Driver.FindElement(By.XPath(String.Format("//div[@class='tbar-top hidden-sm hidden-xs']//a[@onclick='change_currency(this)' and contains(text(), '{0}') ]", newCurrency))).Click();
             return new Currency(Driver);
@@ -57,12 +46,12 @@ namespace Travels_Test.PageObjects
         {
             Driver = driver;
         }
-        public IWebElement LanduageDropdown => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//li[@id='li_myaccount']/following-sibling::ul"));
+        public IWebElement LanguageDropdown => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//li[@id='li_myaccount']/following-sibling::ul[@class='nav navbar-nav']")); 
         internal Language ChangeLanguage(string newLanguage)
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-            wait.Until(p => LanduageDropdown.Displayed == true);
-            LanduageDropdown.Click();
+            wait.Until(p => LanguageDropdown.Displayed == true);
+            LanguageDropdown.Click();
 
             Driver.FindElement(By.XPath(String.Format("//div[@class='tbar-top hidden-sm hidden-xs']//a[@class='go-text-right changelang' and contains(text(), '{0}') ]", newLanguage))).Click();
             return new Language(Driver);

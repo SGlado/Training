@@ -6,15 +6,9 @@ namespace Travels_Test.Framework
 {
     public static class Waiting
     {
-        //protected IWebDriver Driver { get; set; }
-        
-        //public Waiting(IWebDriver driver)
-        //{
-        //    Driver = driver;
-        //}
-        public static bool WaitForMePresent(this IWebElement driver, IWebElement elementToBePresent, int seconds = 30)
+        public static bool WaitForMeDisplayed(this IWebDriver Driver, IWebElement elementToBePresent, int seconds = 30)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
             try
             {
                 wait.Until(p => elementToBePresent.Displayed == true);

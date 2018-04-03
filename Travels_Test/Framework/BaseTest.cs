@@ -1,34 +1,31 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System;
 using System.IO;
 using System.Reflection;
 
 namespace Travels_Test.Framework
 {
-    [TestClass]
+    //[TestFixture]
     public class BaseTest
     {
         internal TestUserCredentials user { get; private set; }
-
         protected IWebDriver GetChromeDriver()
         {
             var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             return new ChromeDriver(outPutDirectory);
         }
-
         public IWebDriver Driver { get; set; }
         public BaseTest(IWebDriver driver)
         {
             Driver = driver;
+            Driver.Manage().Timeouts().ImplicitWait= TimeSpan.FromSeconds(10);
         }
-
         public BaseTest()
         {
-
         }
-
-        [TestInitialize]
+        [OneTimeSetUp]
         public void SetupEverySingleClass()
         {
             Driver = GetChromeDriver();
@@ -38,11 +35,11 @@ namespace Travels_Test.Framework
             user.Login = "user@phptravels.com";
             user.Password = "demouser";
         }
-
-        [TestCleanup]
+        [OneTimeTearDown]
         public void CleanupEverySinglClass()
         {
             Driver.Quit();
         }
+
     }
 }
