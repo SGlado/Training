@@ -1,24 +1,10 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Threading;
-using Travels_Test.Framework;
 
 namespace Travels_Test.PageObjects
 {
-    class AccountPage
-    {
-        protected IWebDriver Driver { get; set; }
-        public AccountPage(IWebDriver driver)
-        {
-            Driver = driver;
-        }
-
-        public IWebElement AccountDropdown => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//*[class='dropdown-menu']"));
-        public IWebElement LogoutButton => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//*[text()='  Logout']"));
-        
-
-    }
+    ////CURRENCY////
     class Currency
     {
         protected IWebDriver Driver { get; set; }
@@ -32,13 +18,12 @@ namespace Travels_Test.PageObjects
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
             wait.Until(p => CurrencyDropdown.Displayed == true);
             CurrencyDropdown.Click();
-
             wait.Until(p => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//ul[@class='dropdown-menu wow fadeIn animated']")).Displayed == true); 
-
             Driver.FindElement(By.XPath(String.Format("//div[@class='tbar-top hidden-sm hidden-xs']//a[@onclick='change_currency(this)' and contains(text(), '{0}') ]", newCurrency))).Click();
             return new Currency(Driver);
         }
     }
+    ////LANGUAGE////
     class Language
     {
         protected IWebDriver Driver { get; set; }
@@ -52,7 +37,6 @@ namespace Travels_Test.PageObjects
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
             wait.Until(p => LanguageDropdown.Displayed == true);
             LanguageDropdown.Click();
-
             Driver.FindElement(By.XPath(String.Format("//div[@class='tbar-top hidden-sm hidden-xs']//a[@class='go-text-right changelang' and contains(text(), '{0}') ]", newLanguage))).Click();
             return new Language(Driver);
         }

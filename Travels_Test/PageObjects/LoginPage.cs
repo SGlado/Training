@@ -4,44 +4,53 @@ using Travels_Test.Framework;
 
 namespace Travels_Test.PageObjects
 {
-    class LoginPage : BaseTest
+    ////LOGIN-LOGOUT////
+    //class AccountPage
+    //{
+    //    protected IWebDriver Driver { get; set; }
+    //    public AccountPage(IWebDriver driver)
+    //    {
+    //        Driver = driver;
+    //    }
+    //    public IWebElement AccountDropdown => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//*[class='dropdown-menu']"));
+    //    public IWebElement LogoutButton => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//*[text()='  Logout']"));
+    //}
+    class LoginLogoutPage : BaseTest
     {
-        public LoginPage(IWebDriver driver)
+        public LoginLogoutPage(IWebDriver driver)
         {
             Driver = driver;
         }
-        //Login Form
-        public IWebElement LoginField => Driver.FindElement(By.XPath("//input[@placeholder='Email']"));
-        public IWebElement PasswordField => Driver.FindElement(By.XPath("//input[@placeholder='Password']"));
-        public IWebElement LoginButton => Driver.FindElement(By.XPath("//*[@id='loginfrm']//button[text()='Login']"));
-        //Tool bar item
-        public IWebElement MyAccountButton => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//*[text()=' My Account ']"));
-        public IWebElement LoginToolbarButton => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//*[text()=' Login']"));
+        public IWebElement Button_MyAccount => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//*[text()=' My Account ']"));
+        public IWebElement Button_MyAccountLogin => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//*[text()=' Login']"));
+        public IWebElement Field_UserName => Driver.FindElement(By.XPath("//input[@placeholder='Email']"));
+        public IWebElement Field_UserPassword => Driver.FindElement(By.XPath("//input[@placeholder='Password']"));
+        public IWebElement Button_PushLogin => Driver.FindElement(By.XPath("//*[@id='loginfrm']//button[text()='Login']"));
+        public IWebElement AccountDropdown => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//*[text()=' DVhbCERv ']"));
+        public IWebElement Button_Logout => Driver.FindElement(By.XPath("//div[@class='tbar-top hidden-sm hidden-xs']//*[text()='  Logout']"));
 
-        internal LoginPage LoginForm()
+        internal LoginLogoutPage LoginForm()
         {
-            MyAccountButton.Click();
-            LoginToolbarButton.Click();
-            return new LoginPage(Driver);
+            Button_MyAccount.Click();
+            Button_MyAccountLogin.Click();
+            return new LoginLogoutPage(Driver);
         }
-        internal LoginPage LoginPassAndSubmit(TestUserCredentials user)
+        internal LoginLogoutPage LoginPassAndSubmit(TestUserCredentials user)
         {
-            LoginField.SendKeys(user.Login);
-            PasswordField.SendKeys(user.Password);
-            LoginButton.Click();
-            return new LoginPage(Driver);
+            Field_UserName.SendKeys(user.Login);
+            Field_UserPassword.SendKeys(user.Password);
+            Thread.Sleep(1000);
+            Button_PushLogin.Click();
+            return new LoginLogoutPage(Driver);
         }
-        //internal AccountPage Logout()
-        //{
-        //    //Driver.WaitForMeDisplayed(Logout.AccountDropdown, 20);
-        //    ////WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-        //    ////wait.Until(p => AccountDropdown.Displayed == true);
-        //    //Thread.Sleep(3000);
-        //    //AccountDropdown.Click();
-        //    //wait.Until(p => LogoutButton.Displayed == true);
-        //    LogoutButton.Click();
-        //    Driver.Navigate().GoToUrl("https://www.phptravels.net/");
-        //    return new AccountPage(Driver);
-        //}
+        internal LoginLogoutPage Logout()
+        {
+            Thread.Sleep(3000);
+            //Driver.WaitForMeDisplayed(AccountDropdown, 20);
+            AccountDropdown.Click();
+            Button_Logout.Click();
+            Driver.Navigate().GoToUrl("https://www.phptravels.net/");
+            return new LoginLogoutPage(Driver);
+        }
     }
 }
